@@ -9,11 +9,6 @@ var handlebars = require('express-handlebars').create({
 var db = null;
 
 
-
-//googleapi key =AIzaSyDsVrCXxQD_MjHErTG_6ZtOriJ4lcmyz-o
-
-
-
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 //set port
