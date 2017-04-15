@@ -138,7 +138,8 @@ fieldset {
 a {
     text-decoration-line: none;
     font-weight: 700;
-    color: red;
+    color: dimgray;
+    
 }
 
 #profile {
