@@ -1,5 +1,29 @@
 <!--CSS LINK-->
 <link rel="stylesheet" href="css/display.css">
-
+<!--CSS LINK-->
+<link rel="stylesheet" href="css/style.css">
+<meta name="viewport" content="initial-scale=1.0; maximum-scale=1.0; width=device-width;">
+<div class="container">
+    <div>
+        <div id="info">
+            <h1>Low Blood Sugar <br>Management</h1> </div>
+    </div>
+    <form id="contact" action="/results">
+        <h4 style="color: red;">{{results}}</h4>
+        <fieldset>
+            <input placeholder="Current Glucose Level" type="number" name="current" tabindex="1" required autofocus> </fieldset>
+        <fieldset>
+            <input placeholder="Target Level" name="target" type="number" tabindex="3" required> </fieldset>
+        <fieldset>
+            <input placeholder="Insulin Sensitivity" name="sensitivity" type="number" tabindex="4" required> </fieldset>
+        <fieldset>
+            <input placeholder="carb ratio" name="carbratio" type="number" tabindex="4" required> </fieldset>
+        <fieldset>
+            <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
+        </fieldset>
+        <p class="copyright">Don't have an Account  <a href="/"_blank title="Colorlib">Sign Up</a></p>
+        <p class="copyright">Login As Guest  <a href="/"_blank title="Colorlib"> Guest</a></p>
+    </form>
+</div>
 
 

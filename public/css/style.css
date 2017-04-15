@@ -135,6 +135,12 @@ fieldset {
     border: 1px solid #aaa;
 }
 
+a {
+    text-decoration-line: none;
+    font-weight: 700;
+    color: red;
+}
+
 #profile {
     padding-top: 50px;
     display: block;
