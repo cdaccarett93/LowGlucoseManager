@@ -5,10 +5,15 @@
 <div class="container">
     <div>
         <div id="info">
-            <h1>Low Blood Sugar <br>Management</h1> </div>
+            <h1>Low Blood Sugar <br> Manager</h1>  </div>
     </div>
     <form id="contact" action="/eval" novalidate>
-        <h4 style="color: red;">{{results}}</h4>
+<!--        <h4 style="color: red;">{{results}}</h4>-->
+       <div id="circle">
+           <div id="curlevel">{{results.[2]}}{{results.[3]}}</div>
+       </div>
+<!--       <div id="arrow">{{results.[3]}}</div>-->
+       <div id="reading">Reading Time: {{results.[4]}}</div>
         <fieldset>
             <input id="current" placeholder="Current Glucose Level" name="current" type="number" value="{{results.[2]}}" tabindex="1" required autofocus> </fieldset>
         <fieldset>
@@ -26,7 +31,9 @@
     </form>
 </div>
 
-<script>
+
+  <script>
+   
     function getLocationConstant() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoError);

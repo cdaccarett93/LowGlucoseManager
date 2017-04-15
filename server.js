@@ -6,7 +6,8 @@ var request = require('request');
 var handlebars = require('express-handlebars').create({
     default: 'main'
 });
-var db = null;
+
+var dateFormat = require('dateformat');
 
 var accountSid = 'AC3192baa49f03c13e114699766cc7a7b9';
 var authToken = '6e9df1ea3aa70727c2442aec5fd244f7';
@@ -16,7 +17,7 @@ var client = require('twilio')(accountSid, authToken);
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 //set port
-var port = (process.env.PORT || 8010);
+var port = (process.env.PORT || 8000);
 //Allows me to use stylesheets in handlebars.
 app.use(express.static('public'));
 
@@ -67,11 +68,44 @@ app.get('/display', function (req, res) {
             console.log("current: " + currentGlucose);
             console.log("direction: " + currentDirection);
             console.log("date of reading: " + dateOfReading);
-            
+            var dateTime = dateFormat(dateOfReading, "m/d/yy, h:MM TT");
+            console.log("dateTime : " + dateTime);
             //Insert values needed to dipslay into an array.
+            
+//↑	\u2191 SingleUp
+//→	\u2192 Flat
+//↓	\u2193 SingleDown
+//↗ \x2197 FortyFiveUp
+//↘ \x2198 FortyFiveDown
+//⇈ \x21c8 DoubleUp
+//⇊ \x21cA DoubleDown                
+    if(currentDirection === 'Flat'){
+        currentDirection = '→';
+    }
+    if(currentDirection === 'SingleUp'){
+        currentDirection = '↑';
+    }
+        if(currentDirection === 'SingleDown'){
+            currentDirection = '↓';
+    }
+        if(currentDirection === 'FortyFiveUp'){
+            currentDirection = '↗';
+    }
+        if(currentDirection === 'FortyFiveDown'){
+            currentDirection = '↘';
+    }
+        if(currentDirection === 'DoubleUp'){
+            currentDirection = '⇈';
+    }
+        if(currentDirection === 'DoubleDown'){
+            currentDirection = '⇊';
+    }
+         if(currentDirection === 'NONE'){
+            currentDirection = '';
+    }
             values.push(currentGlucose);
             values.push(currentDirection);
-            values.push(dateOfReading);
+            values.push(dateTime);
             
             console.log("inside func " + values);
             console.log("up " + val);
@@ -100,19 +134,6 @@ app.get('/displayguest', function (req, res) {
     res.render('displayguest');
 });
 
-
-
-
-//Select all attributes from form
-//app.get('/display', function (req, res, next) {
-//    var context = {};
-//    context.sentData = req.query;
-//    
-//    console.log(context.sentData.current);
-//    console.log(context.sentData.target);
-//    console.log(context.sentData.sensitivity);
-//    console.log(context.sentData.carbratio);
-//});
 
 //API RESULTS (FORM AND MYSQL MANIPULATION)
 app.get('/eval', function (req, res) {

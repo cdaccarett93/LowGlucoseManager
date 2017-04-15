@@ -61,7 +61,7 @@ body {
 }
 
 #contact h4 {
-    margin: 5px 0 15px;
+/*    margin: 5px 0 15px;*/
     display: block;
     font-size: 13px;
     font-weight: 400;
@@ -147,7 +147,8 @@ a {
 }
 
 #profile {
-    padding-top: 50px;
+    width: 50%;
+    padding-bottom: 15px;
     display: block;
     margin: 0 auto;
 }
@@ -173,4 +174,26 @@ a {
     color: white;
     text-align: center;
     font-weight: 900;
+}
+
+#circle {
+    background: coral;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-left: auto ;
+    margin-right: auto;
+}
+#curlevel {
+    color: black;
+    margin: 0 auto;
+    padding-top: 36%;
+    text-align: center;
+    font-size: 3vw;
+}
+
+#reading {
+    color: black;
+    margin-bottom: 30px;
+    text-align:center;
 }
