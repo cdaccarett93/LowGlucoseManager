@@ -9,7 +9,7 @@
         <div id="info">
             <h1>Low Blood Sugar <br>Management</h1> </div>
     </div>
-    <form id="contact" action="/eval">
+    <form id="contact" action="/eval" novalidate>
         <h4 style="color: red;">{{results}}</h4>
         <fieldset>
             <input id="current" placeholder="Current Glucose Level" name="current" type="number" value="{{results.[2]}}" tabindex="1" required autofocus> </fieldset>
@@ -18,11 +18,37 @@
         <fieldset>
             <input id="sens" placeholder="Insulin Sensitivity" name="sensitivity" type="number" value="{{results.[1]}}" tabindex="4" required> </fieldset>
         <fieldset>
-            <input id="carbRatio" placeholder="carb ratio" name="carbratio" type="number" value="{{results.[0]}}" tabindex="4" required></fieldset>
+            <input id="carbRatio" placeholder="carb ratio" name="carbratio" type="number" value="{{results.[0]}}" tabindex="4" required>
+            <input id="lat" name="lat" type="number" value="" tabindex="4" hidden required>
+            <input id="long" name="long" type="number" value="" tabindex="4" hidden required>    
+        </fieldset>
         <fieldset>
-            <button name="submit" type="submit" id="contact-submit" onsubmit="calculate()" data-submit="...Sending">Submit</button>
+            <button name="submit" type="submit" id="contact-submit" onsubmit="" data-submit="...Sending">Submit</button>
         </fieldset>
     </form>
 </div>
 
+<script>
+    function getLocationConstant() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(onGeoSuccess, onGeoError);
+        } else {
+            alert("Your browser or device doesn't support Geolocation");
+        }
+    }
+    
+    getLocationConstant();
 
+    // If we have a successful location update
+    function onGeoSuccess(event) {
+        document.getElementById("lat").value = event.coords.latitude;
+        document.getElementById("long").value = event.coords.longitude;
+
+    }
+
+    // If something has gone wrong with the geolocation request
+    function onGeoError(event) {
+        alert("Error code " + event.code + ". " + event.message);
+    }
+
+</script>

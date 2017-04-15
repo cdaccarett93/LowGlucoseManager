@@ -10,7 +10,6 @@ var db = null;
 
 var accountSid = 'AC3192baa49f03c13e114699766cc7a7b9';
 var authToken = '6e9df1ea3aa70727c2442aec5fd244f7';
-
 var client = require('twilio')(accountSid, authToken);
 
 
@@ -105,18 +104,15 @@ app.get('/displayguest', function (req, res) {
 
 
 //Select all attributes from form
-app.get('/display', function (req, res, next) {
-    var context = {};
-    context.sentData = req.query;
-    
-    console.log(context.sentData.current);
-    console.log(context.sentData.target);
-    console.log(context.sentData.sensitivity);
-    console.log(context.sentData.carbratio);
-
-    
-    
-});
+//app.get('/display', function (req, res, next) {
+//    var context = {};
+//    context.sentData = req.query;
+//    
+//    console.log(context.sentData.current);
+//    console.log(context.sentData.target);
+//    console.log(context.sentData.sensitivity);
+//    console.log(context.sentData.carbratio);
+//});
 
 //API RESULTS (FORM AND MYSQL MANIPULATION)
 app.get('/eval', function (req, res) {
@@ -128,8 +124,15 @@ app.get('/eval', function (req, res) {
     var target = context.sentData.target;
     var inSensitivy = context.sentData.sensitivity;
     var carbRatio = context.sentData.carbratio;
+    var latitude = context.sentData.lat;
+    var longitude = context.sentData.long;
     
     var nSkittles = Math.round((target - current) / ((inSensitivy/carbRatio) * 0.88));
+    
+    //get geolocation
+    console.log(latitude + ' ' + longitude);
+    
+    var location = 'https://www.google.com/maps?q=' + latitude + ',' + longitude;
     
     //Sends SMS Text If Sugar gets to low
             console.log("current glucose: " + current);
@@ -138,7 +141,7 @@ app.get('/eval', function (req, res) {
                 client.sendMessage({
                    to: '+12095059520',
                   from: '+12092088147',
-                  body: 'your glucose level is: ' + current   
+                  body: 'glucose level is: ' + current + ' location is: ' + location    
                 }, function(err, message){
                     if(err) {
                         console.log(err);
