@@ -26,7 +26,7 @@ app.get('/', function (req, res) {
 
 
 //Calculator
-app.get('/display', function (req, res) {
+app.get('/display', function (req, res) {    
     var context = {};
     var val = [];
     
@@ -92,6 +92,13 @@ app.get('/display', function (req, res) {
 };
 
 });
+
+
+
+app.get('/displayguest', function (req, res) {    
+    res.render('displayguest');
+});
+
 
 
 

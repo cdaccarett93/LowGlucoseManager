@@ -1,0 +1,27 @@
+<!--CSS LINK-->
+<link rel="stylesheet" href="css/display.css">
+<!--CSS LINK-->
+<link rel="stylesheet" href="css/style.css">
+<meta name="viewport" content="initial-scale=1.0; maximum-scale=1.0; width=device-width;">
+<script src="js/calculate.js"></script>
+<div class="container">
+    <div>
+        <div id="info">
+            <h1>Low Blood Sugar <br>Management</h1> </div>
+    </div>
+    <form id="contact" action="/eval">
+        <fieldset>
+            <input id="current" placeholder="Current Glucose Level" name="current" type="number" tabindex="1" required autofocus> </fieldset>
+        <fieldset>
+            <input id="target" placeholder="Target Level" name="target" type="number" tabindex="3" required> </fieldset>
+        <fieldset>
+            <input id="sens" placeholder="Insulin Sensitivity" name="sensitivity" type="number" tabindex="4" required> </fieldset>
+        <fieldset>
+            <input id="carbRatio" placeholder="carb ratio" name="carbratio" type="number" tabindex="4" required></fieldset>
+        <fieldset>
+            <button name="submit" type="submit" id="contact-submit" onsubmit="calculate()" data-submit="...Sending">Submit</button>
+        </fieldset>
+    </form>
+</div>
+
+
