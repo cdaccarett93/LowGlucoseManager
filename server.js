@@ -8,6 +8,11 @@ var handlebars = require('express-handlebars').create({
 });
 var db = null;
 
+var accountSid = 'AC3192baa49f03c13e114699766cc7a7b9';
+var authToken = '6e9df1ea3aa70727c2442aec5fd244f7';
+
+var client = require('twilio')(accountSid, authToken);
+
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
@@ -71,10 +76,7 @@ app.get('/display', function (req, res) {
             
             console.log("inside func " + values);
             console.log("up " + val);
-            
-//            var test = val.concat(values);
-//            
-//            console.log("test " + test);
+        
             
             if(val.length != 0){
                 var test = val.concat(values);
@@ -129,6 +131,23 @@ app.get('/eval', function (req, res) {
     
     var nSkittles = Math.round((target - current) / ((inSensitivy/carbRatio) * 0.88));
     
+    //Sends SMS Text If Sugar gets to low
+            console.log("current glucose: " + current);
+            if(current <= 40){
+                
+                client.sendMessage({
+                   to: '+12095059520',
+                  from: '+12092088147',
+                  body: 'your glucose level is: ' + current   
+                }, function(err, message){
+                    if(err) {
+                        console.log(err);
+                    } else {
+                        console.log(message.sid);
+                    }
+                });
+            }
+    
     levels.push(current);
     levels.push(target);
     levels.push(nSkittles);
@@ -140,29 +159,6 @@ app.get('/eval', function (req, res) {
     res.render('results', context);
                 
 });
-
-//Select all attributs from Leads Table and displays it in a Table
-app.get('/search-leads', function (req, res, next) {
-    var context = {};
-    context.sentData = req.query;
-    //Query to select all attributes mysql syntax
-    mysql.pool.query("Select * from danielleads", function (err, rows, fields) {
-        if (err) {
-            next(err);
-            return;
-        }
-        context.results = JSON.stringify(rows);
-        //Puts all rows in an array (leads)
-        var leads = [];
-        for (var i = 0, len = rows.length; i < len; i++) {
-            leads.push(rows[i]);
-        }
-        //We pass the array to handlebars and display it.
-        context.results = leads;
-        res.render('leads', context);
-    });
-});
-
 
 
 
