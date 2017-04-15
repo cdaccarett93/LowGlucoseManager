@@ -124,8 +124,8 @@ SVG Icons - svgicons.sparkk.fr
 }
 .panel:nth-of-type(1) {
   z-index: 9;
-  background: -webkit-radial-gradient(circle at top left, #8AE7E3, #8AE7E3, #8AE7E3);
-  background: radial-gradient(circle at top left, #8AE7E3, #8AE7E3, #8AE7E3);
+  background: -webkit-radial-gradient(circle at top left, #7AE4E0, #7AE4E0, #7AE4E0);
+  background: radial-gradient(circle at top left, #7AE4E0, #7AE4E0, #7AE4E0);
   -webkit-filter: drop-shadow(0 0 1vh #15B4AE);
           filter: drop-shadow(0 0 1vh #15B4AE);
 }
@@ -143,8 +143,8 @@ SVG Icons - svgicons.sparkk.fr
 }
 .panel:nth-of-type(2) {
   z-index: 8;
-  background: -webkit-radial-gradient(circle at top left, #59D5D0, #59D5D0, #59D5D0);
-  background: radial-gradient(circle at top left, #59D5D0, #59D5D0, #59D5D0);
+  background: -webkit-radial-gradient(circle at top left, #44DAD4, #44DAD4, #44DAD4);
+  background: radial-gradient(circle at top left, #44DAD4, #44DAD4, #44DAD4);
   -webkit-filter: drop-shadow(0 0 1vh #15B4AE);
           filter: drop-shadow(0 0 1vh #15B4AE);
 }
@@ -162,8 +162,8 @@ SVG Icons - svgicons.sparkk.fr
 }
 .panel:nth-of-type(3) {
   z-index: 7;
-  background: -webkit-radial-gradient(top left, circle, #15B4AE, #15B4AE, #15B4AE);
-  background: radial-gradient(circle at top left, #15B4AE, #15B4AE, #15B4AE);
+  background: -webkit-radial-gradient(top left, circle, #18D5CE, #18D5CE, #18D5CE);
+  background: radial-gradient(circle at top left, #18D5CE, #18D5CE, #18D5CE);
   -webkit-filter: drop-shadow(0 0 1vh #00928C);
           filter: drop-shadow(0 0 1vh #00928C);
 }
