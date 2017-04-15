@@ -6,12 +6,18 @@ var request = require('request');
 var handlebars = require('express-handlebars').create({
     default: 'main'
 });
+var db = null;
+
+
+
+//googleapi key =AIzaSyDsVrCXxQD_MjHErTG_6ZtOriJ4lcmyz-o
+
 
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 //set port
-var port = (process.env.PORT || 8080);
+var port = (process.env.PORT || 8010);
 //Allows me to use stylesheets in handlebars.
 app.use(express.static('public'));
 
@@ -22,6 +28,7 @@ app.get('/', function (req, res) {
   res.render('home');
 
 });
+
 
 //Calculator
 app.get('/display', function (req, res) {

@@ -5,17 +5,18 @@
     <div>
         <div id="info">
     </div>
-    <form id="contact" action="/eval">
+    <form id="contact" action="/display">
         <h3>Log In</h3>
         <h4 style="color: red;">{{results}}</h4>
         <fieldset>
-            <input placeholder="UserName" type="text" name="name" tabindex="1" required autofocus> </fieldset>
+            <input id="signDiv-username" placeholder="UserName" type="text" name="name" tabindex="1" required autofocus> </fieldset>
         <fieldset>
-            <input placeholder="Password" name="password" type="text" tabindex="3" required> </fieldset>
+            <input id="signDiv-password" placeholder="Password" name="password" type="password" tabindex="3" required> </fieldset>
         <fieldset>
-            <button name="submit" type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
+            <button name="submit" type="submit" id="signDiv-signIn" data-submit="...Sending">Submit</button>
         </fieldset>
         <p class="copyright">Don't have an Account  <a href="/"_blank title="Colorlib">Sign Up</a></p>
         <p class="copyright">Login As Guest  <a href="/"_blank title="Colorlib"> Guest</a></p>
     </form>
 </div>
+    
