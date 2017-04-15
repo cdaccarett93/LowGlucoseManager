@@ -19,7 +19,7 @@ body {
     line-height: 30px;
     color: #777;
     background: /* top, transparent red, faked with gradient */
-    linear-gradient( rgba(230, 0, 0, 0.35), rgba(280, 0, 0, 0.35)), url('https://images.unsplash.com/photo-1480074568708-e7b720bb3f09?dpr=2&auto=format&fit=crop&w=1500&h=996&q=80&cs=tinysrgb&crop=');
+    url('../images/loginbkg.png');
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -157,7 +157,8 @@ fieldset {
     color: #888;
 }
 
-#info h3 {
+#info h1 {
+    padding-top: 20px;
     color: white;
     text-align: center;
     font-weight: 900;

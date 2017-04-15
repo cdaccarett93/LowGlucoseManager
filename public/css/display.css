@@ -29,7 +29,7 @@ body {
       rgba(230, 0, 0, 0.35), 
       rgba(280, 0, 0, 0.35)
     ),
-   url('https://images.unsplash.com/photo-1480074568708-e7b720bb3f09?dpr=2&auto=format&fit=crop&w=1500&h=996&q=80&cs=tinysrgb&crop=');
+   url('http://unsplash.com/photos/FtZL0r4DZYk/download?force=true');
   background-repeat:no-repeat;
   background-size:cover; 
 }
