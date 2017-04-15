@@ -25,33 +25,9 @@ app.get('/', function (req, res) {
 
 //Calculator
 app.get('/display', function (req, res) {
-        
-  res.render('display');
-
-});
-
-//Select all attributes from form
-app.get('/results', function (req, res, next) {
     var context = {};
-    context.sentData = req.query;
+    var val = [];
     
-    console.log(context.sentData.current);
-    console.log(context.sentData.target);
-    console.log(context.sentData.sensitivity);
-    console.log(context.sentData.carbratio);
-
-    
-    
-});
-
-//API RESULTS (FORM AND MYSQL MANIPULATION)
-app.get('/eval', function (req, res) {
-    var context = {};
-    context.sentData = req.query;
-    
-    var values = [];
-    
-    //CALL TO ZESTIMATE
     request('https://daccarett93.herokuapp.com/api/v1/profile.json', function (error, responses, body) {
         if (!error && responses.statusCode == 200) {  
             var results = JSON.parse(body);
@@ -63,16 +39,18 @@ app.get('/eval', function (req, res) {
             console.log("sensitivity: " + insulin_sensitivity);
             
             //Insert values needed to dipslay into an array.
-            values.push(carbratio);
-            values.push(insulin_sensitivity);
-            context.results = values;
-
+            val.push(carbratio);
+            val.push(insulin_sensitivity);
+            getNS();
+            console.log("insidedasdas " + context.results);
+            
         }
     });
     
-    
-    //CALL TO ZESTIMATE
-    request('https://daccarett93.herokuapp.com/api/v1/entries.json', function (error, responses, body) {
+    function getNS() {
+    var context = {};
+    var values = []; 
+    request('https://daccarett93.herokuapp.com/api/v1/entries.json?count=1', function (error, responses, body) {
         if (!error && responses.statusCode == 200) {  
             var entries = JSON.parse(body);
             
@@ -88,16 +66,70 @@ app.get('/eval', function (req, res) {
             values.push(currentGlucose);
             values.push(currentDirection);
             values.push(dateOfReading);
-            context.results = values;
             
-            console.log(context.results);
-                    
-            //Display and render api selected values to be displayed.
-            res.render('display', context);
+            console.log("inside func " + values);
+            console.log("up " + val);
+            
+//            var test = val.concat(values);
+//            
+//            console.log("test " + test);
+            
+            if(val.length != 0){
+                var test = val.concat(values);
+                console.log("test " + test);
+                context.results = test;
+                res.render('display', context);
+            }
+            
+
             
         }
+        console.log("out func " + values);
+        return values;
     });
+};
 
+});
+
+
+
+//Select all attributes from form
+app.get('/display', function (req, res, next) {
+    var context = {};
+    context.sentData = req.query;
+    
+    console.log(context.sentData.current);
+    console.log(context.sentData.target);
+    console.log(context.sentData.sensitivity);
+    console.log(context.sentData.carbratio);
+
+    
+    
+});
+
+//API RESULTS (FORM AND MYSQL MANIPULATION)
+app.get('/eval', function (req, res) {
+    var context = {};
+    var levels = [];
+    
+    context.sentData = req.query;
+    var current = context.sentData.current;
+    var target = context.sentData.target;
+    var inSensitivy = context.sentData.sensitivity;
+    var carbRatio = context.sentData.carbratio;
+    
+    var nSkittles = Math.round((target - current) / ((inSensitivy/carbRatio) * 0.88));
+    
+    levels.push(current);
+    levels.push(target);
+    levels.push(nSkittles);
+    context.results = levels;
+    //Display and render api selected values to be displayed.
+    console.log(context.sentData.current);
+    console.log(context.sentData.target);
+    console.log(nSkittles);
+    res.render('results', context);
+                
 });
 
 //Select all attributs from Leads Table and displays it in a Table
