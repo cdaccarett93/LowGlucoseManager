@@ -34,8 +34,17 @@ app.get('/', function (req, res) {
 app.get('/display', function (req, res) {    
     var context = {};
     var val = [];
+    context.sentData = req.query;
+    var NsURL = context.sentData.NSurl;
+    console.log(NsURL);
     
-    request('https://daccarett93.herokuapp.com/api/v1/profile.json', function (error, responses, body) {
+    var nsProfile = 'https://' + NsURL + '/api/v1/profile.json';
+    var nsEntry = 'https://' + NsURL + '/api/v1/entries.json?count=1';
+    
+    console.log(nsProfile);
+    console.log(nsEntry);
+    
+    request(nsProfile, function (error, responses, body) {
         if (!error && responses.statusCode == 200) {  
             var results = JSON.parse(body);
             
@@ -49,15 +58,13 @@ app.get('/display', function (req, res) {
             val.push(carbratio);
             val.push(insulin_sensitivity);
             getNS();
-            console.log("insidedasdas " + context.results);
-            
         }
     });
     
     function getNS() {
     var context = {};
     var values = []; 
-    request('https://daccarett93.herokuapp.com/api/v1/entries.json?count=1', function (error, responses, body) {
+    request(nsEntry, function (error, responses, body) {
         if (!error && responses.statusCode == 200) {  
             var entries = JSON.parse(body);
             
